@@ -26,7 +26,7 @@ class DrawToolbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey[900]!.withValues(alpha: 0.85),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
@@ -51,7 +51,7 @@ class DrawToolbar extends StatelessWidget {
             icon: Icons.touch_app_outlined,
             tooltip: 'Select shape',
             isActive: drawMode == DrawMode.select,
-            activeColor: const Color(0xFFF97316),
+            activeColor: Colors.blueGrey,
             onTap: () => onModeChanged(DrawMode.select),
           ),
           const _ToolbarDivider(),
@@ -124,7 +124,7 @@ class _ToolbarButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final iconColor =
-        isActive ? (activeColor ?? const Color(0xFF3B82F6)) : Colors.white70;
+        isActive ? activeColor : Colors.black54;
 
     return Tooltip(
       message: tooltip,
@@ -138,7 +138,7 @@ class _ToolbarButton extends StatelessWidget {
           height: 44,
           decoration: BoxDecoration(
             color: isActive
-                ? (activeColor ?? const Color(0xFF3B82F6)).withOpacity(0.18)
+                ? (activeColor ?? const Color(0xFF3B82F6)).withValues(alpha: 0.18)
                 : Colors.transparent,
             borderRadius: BorderRadius.circular(10),
           ),
