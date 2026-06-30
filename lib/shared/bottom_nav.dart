@@ -10,6 +10,14 @@ class BottomNav extends StatelessWidget {
       height: 90,
       decoration: BoxDecoration(
         color: Color(0xFFF5F5F5),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.1),
+            spreadRadius: 10,
+            blurRadius: 20,
+            offset: const Offset(0, 4),
+          ),
+        ],
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(15),
           topRight: Radius.circular(15),

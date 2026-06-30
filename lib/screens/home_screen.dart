@@ -60,8 +60,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: double.infinity,
                     padding: EdgeInsetsGeometry.symmetric(horizontal: 39),
                     decoration: BoxDecoration(
-                      color: Colors.pink.shade300,
+                      // color: Colors.pink.shade300,
                       borderRadius: BorderRadius.circular(20),
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.lightBlue.withValues(alpha: 0.7),
+                          Colors.lightBlue.withValues(alpha: 0.3),
+                        ],
+                      ),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -109,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 260,
                     width: double.infinity,
                     padding: EdgeInsetsGeometry.symmetric(
-                      horizontal: 30,
+                      horizontal: 25,
                       vertical: 20,
                     ),
                     decoration: BoxDecoration(
@@ -195,47 +203,149 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               Container(
+                                padding: EdgeInsets.symmetric(vertical: 8),
                                 decoration: BoxDecoration(
-                                  color: Colors.blueGrey,
-                                  borderRadius: BorderRadius.circular(25),
-                                ),
-                                height: double.infinity,
-                                width: 100,
-                                margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                              ),
-
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.blueGrey,
-                                  borderRadius: BorderRadius.circular(25),
-                                ),
-                                height: double.infinity,
-                                width: 100,
-                                margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                              ),
-
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.blueGrey,
-                                  borderRadius: BorderRadius.circular(25),
-                                ),
-                                height: double.infinity,
-                                width: 100,
-                                margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                              ),
-
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.blueGrey,
+                                  color: Colors.white54,
                                   borderRadius: BorderRadius.circular(25),
                                 ),
                                 height: double.infinity,
                                 width: 100,
                                 margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
                                 child: Column(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Text("6 AM"),
+                                    Text(
+                                      "6 AM",
+                                      style: GoogleFonts.roboto(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight(700),
+                                      ),
+                                    ),
                                     SvgPicture.asset("${pathBase}7.svg"),
+                                    Text(
+                                      "26°",
+                                      style: GoogleFonts.roboto(
+                                        fontSize: 32,
+                                        fontWeight: FontWeight(700),
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                      children: [
+                                        SvgPicture.asset(
+                                          "${pathBase}drop-icon.svg",
+                                        ),
+                                        SizedBox(width: 4),
+                                        Text(
+                                          "40%",
+                                          style: GoogleFonts.roboto(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight(500),
+                                            color: Colors.black54,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.symmetric(vertical: 8),
+                                decoration: BoxDecoration(
+                                  color: Colors.white54,
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                height: double.infinity,
+                                width: 100,
+                                margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                child: Column(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      "6 AM",
+                                      style: GoogleFonts.roboto(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight(700),
+                                      ),
+                                    ),
+                                    SvgPicture.asset("${pathBase}7.svg"),
+                                    Text(
+                                      "26°",
+                                      style: GoogleFonts.roboto(
+                                        fontSize: 32,
+                                        fontWeight: FontWeight(700),
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                      children: [
+                                        SvgPicture.asset(
+                                          "${pathBase}drop-icon.svg",
+                                        ),
+                                        SizedBox(width: 4),
+                                        Text(
+                                          "40%",
+                                          style: GoogleFonts.roboto(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight(500),
+                                            color: Colors.black54,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.symmetric(vertical: 8),
+                                decoration: BoxDecoration(
+                                  color: Colors.white54,
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                height: double.infinity,
+                                width: 100,
+                                margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                child: Column(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      "6 AM",
+                                      style: GoogleFonts.roboto(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight(700),
+                                      ),
+                                    ),
+                                    SvgPicture.asset("${pathBase}7.svg"),
+                                    Text(
+                                      "26°",
+                                      style: GoogleFonts.roboto(
+                                        fontSize: 32,
+                                        fontWeight: FontWeight(700),
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                      children: [
+                                        SvgPicture.asset(
+                                          "${pathBase}drop-icon.svg",
+                                        ),
+                                        SizedBox(width: 4),
+                                        Text(
+                                          "40%",
+                                          style: GoogleFonts.roboto(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight(500),
+                                            color: Colors.black54,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ],
                                 ),
                               ),
