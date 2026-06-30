@@ -1,0 +1,215 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:geos/shared/bottom_nav.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final pathBase = 'assets/images/weathericons/';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        bottom: false,
+        child: Stack(
+          children: [
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Padding(
+                padding: EdgeInsetsGeometry.symmetric(
+                  horizontal: 10,
+                  vertical: 9,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.location_on_outlined, size: 35),
+                        Text(
+                          "Libon, Albay",
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Icon(Icons.notifications, size: 30),
+                  ],
+                ),
+              ),
+            ),
+            Positioned(
+              left: 10,
+              right: 10,
+              top: 90,
+              child: Column(
+                children: [
+                  Container(
+                    height: 250,
+                    width: double.infinity,
+                    padding: EdgeInsetsGeometry.symmetric(horizontal: 39),
+                    decoration: BoxDecoration(
+                      color: Colors.pink.shade300,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "26°",
+                              style: GoogleFonts.roboto(
+                                fontSize: 90,
+                                fontWeight: FontWeight.bold,
+                                height: 0,
+                                letterSpacing: -1.5,
+                              ),
+                            ),
+                            Text(
+                              "Real Feel 26°",
+                              style: GoogleFonts.roboto(
+                                fontSize: 26,
+                                letterSpacing: -1.5,
+                              ),
+                            ),
+                            Text(
+                              "Cloudy",
+                              style: GoogleFonts.roboto(
+                                fontSize: 26,
+                                letterSpacing: -1,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SvgPicture.asset(
+                          "${pathBase}7.svg",
+                          height: 110,
+                          width: 110,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    height: 250,
+                    width: double.infinity,
+                    padding: EdgeInsetsGeometry.symmetric(
+                      horizontal: 30,
+                      vertical: 20,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.pink.shade300,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "HOURLY WEATHER",
+                              style: GoogleFonts.roboto(
+                                fontSize: 16,
+                                letterSpacing: -1,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            Icon(Icons.arrow_forward),
+                          ],
+                        ),
+                        SizedBox(height: 15),
+                        Expanded(
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.blueGrey,
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                height: double.infinity,
+                                width: 100,
+                                margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                child: Column(
+                                  children: [
+                                    Text("6 AM"),
+                                    SvgPicture.asset("${pathBase}7.svg")
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.blueGrey,
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                height: double.infinity,
+                                width: 100,
+                                margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                              ),
+
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.blueGrey,
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                height: double.infinity,
+                                width: 100,
+                                margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                              ),
+
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.blueGrey,
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                height: double.infinity,
+                                width: 100,
+                                margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                              ),
+
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.blueGrey,
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                height: double.infinity,
+                                width: 100,
+                                margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                child: Column(
+                                  children: [
+                                    Text("6 AM"),
+                                    SvgPicture.asset("${pathBase}7.svg")
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Positioned(bottom: 0, right: 0, left: 0, child: BottomNav()),
+          ],
+        ),
+      ),
+    );
+  }
+}

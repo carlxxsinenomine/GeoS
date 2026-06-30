@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geos/components/nav_button.dart';
+import 'package:geos/shared/bottom_nav.dart';
 import 'package:maplibre/maplibre.dart';
 
 import '../controllers/draw_controller.dart';
@@ -92,24 +93,7 @@ class _MapScreenState extends State<MapScreen> {
             bottom: 0,
             right: 0,
             left: 0,
-            child: Container(
-              height: 90,
-              decoration: BoxDecoration(
-                color: Color(0xFFF5F5F5),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  topRight: Radius.circular(15),
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  NavButton(isActive: false, text: 'Home', icon: Icons.home,),
-                  NavButton(isActive: true, text: 'Map', icon: Icons.map_rounded,),
-                  NavButton(isActive: false, text: 'Profile', icon: Icons.person,),
-                ],
-              ),
-            ),
+            child: BottomNav(),
           ),
         ],
       ),
