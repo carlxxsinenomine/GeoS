@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:geos/components/nav_button.dart';
-import 'package:geos/shared/bottom_nav.dart';
+import 'package:geos/shared/widgets/bottom_nav.dart';
 import 'package:maplibre/maplibre.dart';
 
-import '../controllers/draw_controller.dart';
-import '../models/draw_mode.dart';
+import '../view_models/draw_controller.dart';
+import '../../../../models/draw_mode.dart';
 import '../widgets/draw_toolbar.dart';
 
 class MapScreen extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:geos/contants.dart';
+import 'package:geos/core/contants.dart';
 
 class NavButton extends StatelessWidget {
   final bool isActive;

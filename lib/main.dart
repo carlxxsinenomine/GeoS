@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geos/routes/router.dart';
-import 'package:geos/screens/map_screen.dart';
+import 'package:geos/app/router/router.dart';
 
 void main() {
   runApp(ProviderScope(child: MyApp()));

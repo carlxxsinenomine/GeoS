@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:geos/components/nav_button.dart';
+import 'package:geos/shared/widgets/nav_button.dart';
 
 class BottomNav extends StatelessWidget {
   const BottomNav({super.key});

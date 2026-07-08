@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:geos/components/home_screen/horizontal_container.dart';
-import 'package:geos/components/home_screen/vertical_container.dart';
-import 'package:geos/shared/bottom_nav.dart';
+import 'package:geos/features/weather/presentation/widgets/home_screen/horizontal_container.dart';
+import 'package:geos/features/weather/presentation/widgets/home_screen/vertical_container.dart';
+import 'package:geos/shared/widgets/bottom_nav.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import '../../../../core/contants.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -13,8 +13,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final pathBase = 'assets/images/weathericons/';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,9 +80,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
                           SvgPicture.asset(
-                            "${pathBase}7.svg",
+                            "${wunderPath}11.svg",
                             height: 110,
                             width: 110,
+                            color: Colors.white,
                           ),
                         ],
                       ),
@@ -125,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Icon(Icons.arrow_forward),
                             ],
                           ),
-                          SizedBox(height: 15),
+                          const SizedBox(height: 15),
                           Expanded(
                             child: ListView(
                               scrollDirection: Axis.horizontal,
@@ -140,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Container(
                       height: 400,
                       width: double.infinity,
@@ -176,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Icon(Icons.arrow_forward),
                             ],
                           ),
-                          SizedBox(height: 15),
+                          const SizedBox(height: 15),
                           Expanded(
                             child: ListView(
                               children: [

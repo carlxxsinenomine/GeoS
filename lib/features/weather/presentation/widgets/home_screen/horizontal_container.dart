@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:geos/contants.dart';
+import 'package:geos/core/contants.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HorizontalContainer extends StatelessWidget {

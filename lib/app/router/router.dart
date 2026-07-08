@@ -1,5 +1,5 @@
-import 'package:geos/screens/home_screen.dart';
-import 'package:geos/screens/map_screen.dart';
+import 'package:geos/features/map/presentation/screens/map_screen.dart';
+import 'package:geos/features/weather/presentation/screens/home_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final GoRouter router = GoRouter(
