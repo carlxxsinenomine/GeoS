@@ -1,12 +1,12 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
+import 'package:geos/core/utils/geo_utils.dart';
+import 'package:geos/core/utils/geojson_builder.dart';
+import 'package:geos/core/utils/map_layer_ids.dart';
+import 'package:geos/features/map/data/models/draw_mode.dart';
 import 'package:maplibre/maplibre.dart';
 
-import '../../../../models/draw_mode.dart';
-import '../../../../core/utils/geo_utils.dart';
-import '../../../../utils/geojson_builder.dart';
-import '../../../../utils/map_layer_ids.dart';
 
 class DrawController extends ChangeNotifier {
   MapController? mapController;

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:maplibre/maplibre.dart';
 
-import '../../models/draw_mode.dart';
+import '../../features/map/data/models/draw_mode.dart';
 
 abstract final class GeoJsonBuilder {
   static Map<String, dynamic> pointFeature(

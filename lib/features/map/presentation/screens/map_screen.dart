@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:geos/features/map/data/models/draw_mode.dart';
+import 'package:geos/features/map/presentation/view_models/draw_controller.dart';
+import 'package:geos/features/map/presentation/widgets/draw_toolbar.dart';
 import 'package:geos/shared/widgets/bottom_nav.dart';
 import 'package:maplibre/maplibre.dart';
 
-import '../view_models/draw_controller.dart';
-import '../../../../models/draw_mode.dart';
-import '../widgets/draw_toolbar.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -73,7 +73,7 @@ class _MapScreenState extends State<MapScreen> {
                     const SizedBox(height: 8),
                     ListenableBuilder(
                       listenable: _draw,
-                      builder: (_, __) => DrawToolbar(
+                      builder: (_, _) => DrawToolbar(
                         drawMode: _draw.drawMode,
                         hasActivePoints: _draw.currentPoints.isNotEmpty,
                         hasSelection: _draw.selectedIndex >= 0,

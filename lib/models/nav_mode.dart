@@ -1,1 +1,0 @@
-enum NavMode {home, map, profile, chat}

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../models/draw_mode.dart';
+import '../../data/models/draw_mode.dart';
 
 class DrawToolbar extends StatelessWidget {
   const DrawToolbar({

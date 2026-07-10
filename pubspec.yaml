@@ -23,6 +23,10 @@ dependencies:
   riverpod_generator: ^4.0.4
   google_fonts: ^8.1.0
   flutter_svg: ^2.3.0
+  retrofit: ^4.9.2
+  dio: ^5.10.0
+  dartz: ^0.10.1
+  retrofit_generator: ^10.2.7
 
 dev_dependencies:
   flutter_test:
