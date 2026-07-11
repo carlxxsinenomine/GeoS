@@ -4,5 +4,5 @@ import 'package:geos/features/weather/domain/entities/ten_day_weather_entity.dar
 
 abstract class TenDayWeatherRepository {
   Future<Either<DioException, TenDayWeatherEntity>> getLatestTenDayWeather();
-  Future<Either<DioException, TenDayWeatherEntity>> getAllTenDayWeather();
+  Future<Either<DioException, List<TenDayWeatherEntity>>> getAllTenDayWeather();
 }

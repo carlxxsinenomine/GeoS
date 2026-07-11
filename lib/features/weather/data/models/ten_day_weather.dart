@@ -6,6 +6,9 @@
 // precip_chance_today: List[int] = Field()
 // precip_chance_tonight: List[int] = Field()
 
+import 'package:geos/features/weather/domain/entities/current_weather_entity.dart';
+import 'package:geos/features/weather/domain/entities/ten_day_weather_entity.dart';
+
 class TenDayWeather {
   final List<String> dayOfWeek;
   final List<double> tempMax;
@@ -42,6 +45,16 @@ class TenDayWeather {
     'today_icon': todayIcons,
     'tonight_icon': tonightIcons,
     'precip_chance_today': precipChanceToday,
-    'precip_chance_tonight': precipChanceTonight
+    'precip_chance_tonight': precipChanceTonight,
   };
+
+  TenDayWeatherEntity toEntity() => TenDayWeatherEntity(
+    dayOfWeek: dayOfWeek,
+    tempMax: tempMax,
+    tempMin: tempMin,
+    todayIcons: todayIcons,
+    tonightIcons: tonightIcons,
+    precipChanceToday: precipChanceToday,
+    precipChanceTonight: precipChanceTonight,
+  );
 }

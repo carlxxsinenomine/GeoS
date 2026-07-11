@@ -3,6 +3,8 @@
 // temps: List[float] = Field()
 // conditions: List[str] = Field()
 // precipitations: List[int] = Field()
+import 'package:geos/features/weather/domain/entities/hourly_weather_entity.dart';
+
 class HourlyWeather {
   final List<String> times;
   final List<int> icons;
@@ -31,6 +33,14 @@ class HourlyWeather {
     'icons': icons,
     'temps': temperatures,
     'conditions': conditions,
-    'precipitations': precipitations
+    'precipitations': precipitations,
   };
+
+  HourlyWeatherEntity toEntity() => HourlyWeatherEntity(
+    times: times,
+    icons: icons,
+    temperatures: temperatures,
+    conditions: conditions,
+    precipitations: precipitations,
+  );
 }

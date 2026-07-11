@@ -1,3 +1,5 @@
+import 'package:geos/features/weather/domain/entities/current_weather_entity.dart';
+
 class CurrentWeather {
   final int icon;
   final double realFeel;
@@ -22,8 +24,13 @@ class CurrentWeather {
     'icon': icon,
     'real_feel': realFeel,
     'temp': temperature,
-    'weather_conditions': weatherConditions
+    'weather_conditions': weatherConditions,
   };
 
-
+  CurrentWeatherEntity toEntity() => CurrentWeatherEntity(
+    icon: icon,
+    realFeel: realFeel,
+    temperature: temperature,
+    weatherConditions: weatherConditions,
+  );
 }
