@@ -18,24 +18,24 @@ class ITenDayWeather implements TenDayWeatherRepository {
   ITenDayWeather(GeosTenDayService api) : _geosService = api;
 
   @override
-  Future<Either<DioException, List<TenDayWeatherEntity>>>
+  Future<Either<Exception, List<TenDayWeatherEntity>>>
   getAllTenDayWeather() async {
     try {
       final weatherData = await _geosService.getAllTenDayWeather();
       return Right(weatherData.map((data) => data.toEntity()).toList());
     } catch (e) {
-      return Left(DioException(requestOptions: RequestOptions()));
+      return Left(Exception(e));
     }
   }
 
   @override
-  Future<Either<DioException, TenDayWeatherEntity>>
+  Future<Either<Exception, TenDayWeatherEntity>>
   getLatestTenDayWeather() async {
     try {
       final weatherData = await _geosService.getLatestTenDayWeather();
       return Right(weatherData.toEntity());
     } catch (e) {
-      return Left(DioException(requestOptions: RequestOptions()));
+      return Left(Exception(e));
     }
   }
 }

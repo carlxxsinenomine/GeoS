@@ -15,22 +15,22 @@ class IHourlyWeather implements HourlyWeatherRepository {
   final GeosHourlyService _geosService;
   IHourlyWeather(GeosHourlyService api) : _geosService = api;
   @override
-  Future<Either<DioException, List<HourlyWeatherEntity>>> getAllHourlyWeather() async {
+  Future<Either<Exception, List<HourlyWeatherEntity>>> getAllHourlyWeather() async {
     try {
       final weatherData = await _geosService.getAllHourlyWeather();
       return Right(weatherData.map((data) => data.toEntity()).toList());
     } catch(e) {
-      return Left(DioException(requestOptions: RequestOptions()));
+      return Left(Exception(e));
     }
   }
 
   @override
-  Future<Either<DioException, HourlyWeatherEntity>> getLatestHourlyWeather() async {
+  Future<Either<Exception, HourlyWeatherEntity>> getLatestHourlyWeather() async {
     try {
       final weatherData = await _geosService.getLatestHourlyWeather();
       return Right(weatherData.toEntity());
     } catch (e) {
-      return Left(DioException(requestOptions: RequestOptions()));
+      return Left(Exception(e));
     }
   }
 

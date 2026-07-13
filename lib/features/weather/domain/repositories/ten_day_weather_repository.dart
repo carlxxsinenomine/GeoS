@@ -3,6 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:geos/features/weather/domain/entities/ten_day_weather_entity.dart';
 
 abstract class TenDayWeatherRepository {
-  Future<Either<DioException, TenDayWeatherEntity>> getLatestTenDayWeather();
-  Future<Either<DioException, List<TenDayWeatherEntity>>> getAllTenDayWeather();
+  Future<Either<Exception, TenDayWeatherEntity>> getLatestTenDayWeather();
+  Future<Either<Exception, List<TenDayWeatherEntity>>> getAllTenDayWeather();
 }
