@@ -7,7 +7,7 @@ part 'geos_hourly_service.g.dart';
 
 @RestApi(baseUrl: "$baseUrl/hourly_weather}")
 abstract class GeosHourlyService {
-  factory GeosHourlyService(Dio dio, {String, baseUrl}) = _GeosHourlyService;
+  factory GeosHourlyService(Dio dio, {String baseUrl}) = _GeosHourlyService;
 
   @GET("/get_latest")
   Future<HourlyWeather> getLatestHourlyWeather();
