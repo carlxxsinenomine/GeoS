@@ -27,6 +27,7 @@ dependencies:
   dio: ^5.10.0
   dartz: ^0.10.1
   retrofit_generator: ^10.2.7
+  pretty_dio_logger: ^1.4.0
 
 dev_dependencies:
   flutter_test:

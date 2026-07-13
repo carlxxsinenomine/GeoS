@@ -1,11 +1,17 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:dio/src/dio_exception.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geos/features/weather/data/services/hourly/geos_hourly_service.dart';
+import 'package:geos/features/weather/data/services/services_provider.dart';
 import 'package:geos/features/weather/domain/entities/hourly_weather_entity.dart';
 import 'package:geos/features/weather/domain/repositories/hourly_weather_repository.dart';
 
-class IHourlyWeather extends HourlyWeatherRepository {
+final hourlyWeatherProvider = Provider<HourlyWeatherRepository>((ref) {
+  final hourlyWeatherService = ref.watch(hourlyServiceProvider);
+  return IHourlyWeather(hourlyWeatherService);
+});
+
+class IHourlyWeather implements HourlyWeatherRepository {
   final GeosHourlyService _geosService;
   IHourlyWeather(GeosHourlyService api) : _geosService = api;
   @override

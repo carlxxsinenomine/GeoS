@@ -1,11 +1,19 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:dio/src/dio_exception.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geos/core/di/dio_provider.dart';
 import 'package:geos/features/weather/data/services/current/geos_current_service.dart';
+import 'package:geos/features/weather/data/services/services_provider.dart';
 import 'package:geos/features/weather/domain/entities/current_weather_entity.dart';
 import 'package:geos/features/weather/domain/repositories/current_weather_repository.dart';
 
-class ICurrentWeather extends CurrentWeatherRepository {
+final currentWeatherProvider = Provider<CurrentWeatherRepository>((ref) {
+  final currentWeatherService = ref.watch(currentServiceProvider);
+  return ICurrentWeather(currentWeatherService);
+});
+
+
+class ICurrentWeather implements CurrentWeatherRepository {
   final GeosCurrentService _geosService;
   ICurrentWeather(GeosCurrentService api) : _geosService = api;
 
@@ -28,5 +36,4 @@ class ICurrentWeather extends CurrentWeatherRepository {
       return Left(DioException(requestOptions: RequestOptions()));
     }
   }
-
 }

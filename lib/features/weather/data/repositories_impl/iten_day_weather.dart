@@ -1,19 +1,27 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:dio/src/dio_exception.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geos/features/weather/data/services/services_provider.dart';
 import 'package:geos/features/weather/data/services/ten_day/geos_ten_day_service.dart';
 import 'package:geos/features/weather/domain/entities/ten_day_weather_entity.dart';
 import 'package:geos/features/weather/domain/repositories/ten_day_weather_repository.dart';
 
-class ITenDayWeather extends TenDayWeatherRepository {
+final tenDayWeatherProvider = Provider<TenDayWeatherRepository>((ref) {
+  final tenDayWeatherService = ref.watch(tenDayServiceProvider);
+  return ITenDayWeather(tenDayWeatherService);
+});
+
+class ITenDayWeather implements TenDayWeatherRepository {
   final GeosTenDayService _geosService;
+
   ITenDayWeather(GeosTenDayService api) : _geosService = api;
 
   @override
-  Future<Either<DioException, List<TenDayWeatherEntity>>> getAllTenDayWeather() async {
+  Future<Either<DioException, List<TenDayWeatherEntity>>>
+  getAllTenDayWeather() async {
     try {
-      final  weatherData = await _geosService.getAllTenDayWeather();
+      final weatherData = await _geosService.getAllTenDayWeather();
       return Right(weatherData.map((data) => data.toEntity()).toList());
     } catch (e) {
       return Left(DioException(requestOptions: RequestOptions()));
@@ -21,7 +29,8 @@ class ITenDayWeather extends TenDayWeatherRepository {
   }
 
   @override
-  Future<Either<DioException, TenDayWeatherEntity>> getLatestTenDayWeather() async {
+  Future<Either<DioException, TenDayWeatherEntity>>
+  getLatestTenDayWeather() async {
     try {
       final weatherData = await _geosService.getLatestTenDayWeather();
       return Right(weatherData.toEntity());
@@ -29,5 +38,4 @@ class ITenDayWeather extends TenDayWeatherRepository {
       return Left(DioException(requestOptions: RequestOptions()));
     }
   }
-
 }
