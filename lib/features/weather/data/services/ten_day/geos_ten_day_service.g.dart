@@ -12,7 +12,7 @@ part of 'geos_ten_day_service.dart';
 
 class _GeosTenDayService implements GeosTenDayService {
   _GeosTenDayService(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'http://127.0.0.1:5000/ten_day_weather';
+    baseUrl ??= 'http://10.0.2.2:5000/ten_day_weather';
   }
 
   final Dio _dio;

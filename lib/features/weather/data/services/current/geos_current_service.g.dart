@@ -12,7 +12,7 @@ part of 'geos_current_service.dart';
 
 class _GeosCurrentService implements GeosCurrentService {
   _GeosCurrentService(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'http://127.0.0.1:5000/current_weather';
+    baseUrl ??= 'http://10.0.2.2:5000/current_weather';
   }
 
   final Dio _dio;

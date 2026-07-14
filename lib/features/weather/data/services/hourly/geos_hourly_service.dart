@@ -5,7 +5,7 @@ import 'package:retrofit/retrofit.dart';
 
 part 'geos_hourly_service.g.dart';
 
-@RestApi(baseUrl: "$baseUrl/hourly_weather}")
+@RestApi(baseUrl: "$baseUrl/hourly_weather")
 abstract class GeosHourlyService {
   factory GeosHourlyService(Dio dio, {String baseUrl}) = _GeosHourlyService;
 

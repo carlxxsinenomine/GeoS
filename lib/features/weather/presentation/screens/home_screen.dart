@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:geos/features/weather/presentation/widgets/home_screen/horizontal_container.dart';
-import 'package:geos/features/weather/presentation/widgets/home_screen/vertical_container.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geos/features/weather/presentation/view_models/current_weather_notifier.dart';
+import 'package:geos/features/weather/presentation/view_models/hourly_weather_notifier.dart';
+import 'package:geos/features/weather/presentation/view_models/ten_day_weather_notifier.dart';
+import 'package:geos/features/weather/presentation/widgets/current_widget.dart';
+import 'package:geos/features/weather/presentation/widgets/hourly_widget.dart';
+import 'package:geos/features/weather/presentation/widgets/ten_day_widget.dart';
 import 'package:geos/shared/widgets/bottom_nav.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../core/contants.dart';
-class HomeScreen extends StatefulWidget {
+
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final currentProvider = ref.watch(currentWeatherNotifierProvider);
+    final hourlyProvider = ref.watch(hourlyWeatherNotifierProvider);
+    final tenDayProvider = ref.watch(tenDayWeatherNotifierProvider);
+
     return Scaffold(
       body: SafeArea(
         bottom: false,
@@ -29,176 +37,32 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: MediaQuery.sizeOf(context).height,
                 child: ListView(
                   children: [
-                    Container(
-                      height: 250,
-                      width: double.infinity,
-                      padding: EdgeInsetsGeometry.symmetric(horizontal: 39),
-                      margin: EdgeInsets.only(top: 90),
-                      decoration: BoxDecoration(
-                        // color: Colors.pink.shade300,
-                        borderRadius: BorderRadius.circular(20),
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Colors.lightBlue.withValues(alpha: 0.7),
-                            Colors.lightBlue.withValues(alpha: 0.3),
-                          ],
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "26°",
-                                style: GoogleFonts.roboto(
-                                  fontSize: 90,
-                                  fontWeight: FontWeight.bold,
-                                  height: 0,
-                                  letterSpacing: -1.5,
-                                ),
-                              ),
-                              Text(
-                                "Real Feel 26°",
-                                style: GoogleFonts.roboto(
-                                  fontSize: 26,
-                                  letterSpacing: -1.5,
-                                ),
-                              ),
-                              Text(
-                                "Cloudy",
-                                style: GoogleFonts.roboto(
-                                  fontSize: 26,
-                                  letterSpacing: -1,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SvgPicture.asset(
-                            "${wunderPath}11.svg",
-                            height: 110,
-                            width: 110,
-                            color: Colors.white,
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    Container(
-                      height: 260,
-                      width: double.infinity,
-                      padding: EdgeInsetsGeometry.symmetric(
-                        horizontal: 25,
-                        vertical: 20,
-                      ),
-                      decoration: BoxDecoration(
-                        // color: Colors.pink.shade300,
-                        borderRadius: BorderRadius.circular(20),
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Colors.lightBlue.withValues(alpha: 0.3),
-                            Colors.lightBlue.withValues(alpha: 0.8),
-                          ],
-                        ),
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "HOURLY WEATHER",
-                                style: GoogleFonts.roboto(
-                                  fontSize: 16,
-                                  letterSpacing: -1,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                              Icon(Icons.arrow_forward),
-                            ],
-                          ),
-                          const SizedBox(height: 15),
-                          Expanded(
-                            child: ListView(
-                              scrollDirection: Axis.horizontal,
-                              children: [
-                                VerticalContainer(),
-                                VerticalContainer(),
-                                VerticalContainer(),
-                                VerticalContainer(),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                    currentProvider.when(
+                      data: (data) {
+                        return CurrentWidget(
+                          temperature: "${data.temperature}",
+                          realFeel: "${data.realFeel}",
+                          iconCode: data.icon,
+                          weatherCondition: data.weatherConditions,
+                        );
+                      },
+                      error: (err, stack) {
+                        return Center(child: Text('$err'));
+                      },
+                      loading: () {
+                        return const CircularProgressIndicator();
+                      },
                     ),
                     const SizedBox(height: 10),
-                    Container(
-                      height: 400,
-                      width: double.infinity,
-                      padding: EdgeInsetsGeometry.symmetric(
-                        horizontal: 25,
-                        vertical: 20,
-                      ),
-                      decoration: BoxDecoration(
-                        // color: Colors.pink.shade300,
-                        borderRadius: BorderRadius.circular(20),
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Colors.lightBlue.withValues(alpha: 0.8),
-                            Colors.lightBlue.withValues(alpha: 0.3),
-                          ],
-                        ),
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "10-DAY WEATHER FORECAST",
-                                style: GoogleFonts.roboto(
-                                  fontSize: 16,
-                                  letterSpacing: -1,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                              Icon(Icons.arrow_forward),
-                            ],
-                          ),
-                          const SizedBox(height: 15),
-                          Expanded(
-                            child: ListView(
-                              children: [
-                                HorizontalContainer(),
-                                HorizontalContainer(),
-                                HorizontalContainer(),
-                                HorizontalContainer(),
-                                HorizontalContainer(),
-                                HorizontalContainer(),
-                                HorizontalContainer(),
-                                HorizontalContainer(),
-                                HorizontalContainer(),
-                                HorizontalContainer(),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    HourlyWidget(),
+                    const SizedBox(height: 10),
+                    TenDayWidget(),
                   ],
                 ),
               ),
             ),
+
+            /// Header
             Positioned(
               top: 0,
               left: 0,
@@ -232,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             "Libon, Albay",
                             style: GoogleFonts.roboto(
                               fontSize: 30,
-                              fontWeight: FontWeight.bold
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ],

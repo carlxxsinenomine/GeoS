@@ -12,7 +12,7 @@ part of 'geos_hourly_service.dart';
 
 class _GeosHourlyService implements GeosHourlyService {
   _GeosHourlyService(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'http://127.0.0.1:5000/hourly_weather}';
+    baseUrl ??= 'http://10.0.2.2:5000/hourly_weather';
   }
 
   final Dio _dio;

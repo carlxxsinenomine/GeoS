@@ -17,7 +17,7 @@ class CurrentWeather {
     icon: json['icon'],
     realFeel: json['real_feel'],
     temperature: json['temp'],
-    weatherConditions: json['weather_conditions'],
+    weatherConditions: json['weather_condition'],
   );
 
   Map<String, dynamic> toJson() => {
