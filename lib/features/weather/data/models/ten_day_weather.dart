@@ -11,12 +11,13 @@ import 'package:geos/features/weather/domain/entities/ten_day_weather_entity.dar
 
 class TenDayWeather {
   final List<String> dayOfWeek;
-  final List<double> tempMax;
-  final List<double> tempMin;
+  final List<int> tempMax;
+  final List<int> tempMin;
   final List<int> todayIcons;
   final List<int> tonightIcons;
   final List<int> precipChanceToday;
   final List<int> precipChanceTonight;
+  final List<String> dates;
 
   TenDayWeather({
     required this.dayOfWeek,
@@ -26,16 +27,18 @@ class TenDayWeather {
     required this.tonightIcons,
     required this.precipChanceToday,
     required this.precipChanceTonight,
+    required this.dates,
   });
 
   factory TenDayWeather.fromJson(Map<String, dynamic> json) => TenDayWeather(
-    dayOfWeek: json['day_of_week'],
-    tempMax: json['temp_max'],
-    tempMin: json['temp_min'],
-    todayIcons: json['today_icon'],
-    tonightIcons: json['tonight_icon'],
-    precipChanceToday: json['precip_chance_today'],
-    precipChanceTonight: json['precip_chance_tonight'],
+    dayOfWeek: List<String>.from(json['day_of_week']),
+    tempMax: List<int>.from(json['temp_max']),
+    tempMin: List<int>.from(json['temp_min']),
+    dates: List<String>.from(json['date']),
+    todayIcons: List<int>.from(json['today_icon']),
+    tonightIcons: List<int>.from(json['tonight_icon']),
+    precipChanceToday: List<int>.from(json['precip_chance_today']),
+    precipChanceTonight: List<int>.from(json['precip_chance_tonight']),
   );
 
   Map<String, dynamic> toJson() => {
@@ -52,6 +55,7 @@ class TenDayWeather {
     dayOfWeek: dayOfWeek,
     tempMax: tempMax,
     tempMin: tempMin,
+    dates: dates,
     todayIcons: todayIcons,
     tonightIcons: tonightIcons,
     precipChanceToday: precipChanceToday,

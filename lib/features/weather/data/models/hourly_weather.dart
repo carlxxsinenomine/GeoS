@@ -8,7 +8,7 @@ import 'package:geos/features/weather/domain/entities/hourly_weather_entity.dart
 class HourlyWeather {
   final List<String> times;
   final List<int> icons;
-  final List<double> temperatures;
+  final List<int> temperatures;
   final List<String> conditions;
   final List<int> precipitations;
 
@@ -21,11 +21,11 @@ class HourlyWeather {
   });
 
   factory HourlyWeather.fromJson(Map<String, dynamic> json) => HourlyWeather(
-    times: json['times'],
-    icons: json['icons'],
-    temperatures: json['temps'],
-    conditions: json['conditions'],
-    precipitations: json['precipitations'],
+    times: List<String>.from(json['times']),
+    icons: List<int>.from(json['icons']),
+    temperatures: List<int>.from(json['temps']),
+    conditions: List<String>.from(json['conditions']),
+    precipitations: List<int>.from(json['precipitations']),
   );
 
   Map<String, dynamic> toJson() => {

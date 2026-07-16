@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:geos/features/weather/presentation/widgets/home_screen/horizontal_container.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TenDayWidget extends StatelessWidget {
-  const TenDayWidget({super.key});
+  final Widget? weatherData;
+
+  const TenDayWidget({super.key, this.weatherData});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 400,
       width: double.infinity,
-      padding: EdgeInsetsGeometry.symmetric(
+      padding: const EdgeInsetsGeometry.symmetric(
         horizontal: 25,
         vertical: 20,
       ),
@@ -39,25 +40,12 @@ class TenDayWidget extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              Icon(Icons.arrow_forward),
+              const Icon(Icons.arrow_forward),
             ],
           ),
           const SizedBox(height: 15),
           Expanded(
-            child: ListView(
-              children: [
-                HorizontalContainer(),
-                HorizontalContainer(),
-                HorizontalContainer(),
-                HorizontalContainer(),
-                HorizontalContainer(),
-                HorizontalContainer(),
-                HorizontalContainer(),
-                HorizontalContainer(),
-                HorizontalContainer(),
-                HorizontalContainer(),
-              ],
-            ),
+            child: weatherData!,
           ),
         ],
       ),

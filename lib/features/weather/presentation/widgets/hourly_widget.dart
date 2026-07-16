@@ -3,7 +3,8 @@ import 'package:geos/features/weather/presentation/widgets/home_screen/vertical_
 import 'package:google_fonts/google_fonts.dart';
 
 class HourlyWidget extends StatelessWidget {
-  const HourlyWidget({super.key});
+  final Widget? hourlyWeather;
+  const HourlyWidget({super.key, this.hourlyWeather});
 
   @override
   Widget build(BuildContext context) {
@@ -44,15 +45,7 @@ class HourlyWidget extends StatelessWidget {
           ),
           const SizedBox(height: 15),
           Expanded(
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                VerticalContainer(),
-                VerticalContainer(),
-                VerticalContainer(),
-                VerticalContainer(),
-              ],
-            ),
+            child: hourlyWeather!
           ),
         ],
       ),

@@ -6,9 +6,9 @@ import 'package:google_fonts/google_fonts.dart';
 class HorizontalContainer extends StatelessWidget {
   final String? day;
   final String? date;
-  final IconData? cloud;
-  final String? temp;
-  final String? rainProb;
+  final int? cloud;
+  final int? temp;
+  final int? rainProb;
 
   const HorizontalContainer({
     super.key,
@@ -22,14 +22,14 @@ class HorizontalContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
         color: Colors.white54,
         borderRadius: BorderRadius.circular(25),
       ),
       width: double.infinity,
       height: 100,
-      margin: EdgeInsets.fromLTRB(0, 0, 0, 8),
+      margin: const EdgeInsets.fromLTRB(0, 0, 0, 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -38,7 +38,7 @@ class HorizontalContainer extends StatelessWidget {
             children: [
               Flexible(
                 child: Text(
-                  "TODAY",
+                  day!,
                   style: GoogleFonts.roboto(
                     fontSize: 17,
                     fontWeight: FontWeight(800),
@@ -47,7 +47,7 @@ class HorizontalContainer extends StatelessWidget {
               ),
               Flexible(
                 child: Text(
-                  "7/1",
+                  date!,
                   style: GoogleFonts.roboto(
                     fontSize: 15,
                     fontWeight: FontWeight(500),
@@ -57,9 +57,9 @@ class HorizontalContainer extends StatelessWidget {
               ),
             ],
           ),
-          SvgPicture.asset("${pathBase}7.svg"),
+          SvgPicture.asset("$pathBase${cloud ?? 7}.svg"),
           Text(
-            "26°",
+            "${temp ?? 26}°",
             style: GoogleFonts.roboto(
               fontSize: 32,
               fontWeight: FontWeight(700),
@@ -69,9 +69,9 @@ class HorizontalContainer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgPicture.asset("${pathBase}drop-icon.svg"),
-              SizedBox(width: 4),
+              const SizedBox(width: 4),
               Text(
-                "40%",
+                "${rainProb ?? 40}%",
                 style: GoogleFonts.roboto(
                   fontSize: 16,
                   fontWeight: FontWeight(500),

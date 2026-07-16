@@ -1,7 +1,7 @@
 class HourlyWeatherEntity {
   final List<String> times;
   final List<int> icons;
-  final List<double> temperatures;
+  final List<int> temperatures;
   final List<String> conditions;
   final List<int> precipitations;
 

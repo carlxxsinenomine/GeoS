@@ -1,11 +1,12 @@
 class TenDayWeatherEntity {
   final List<String> dayOfWeek;
-  final List<double> tempMax;
-  final List<double> tempMin;
+  final List<int> tempMax;
+  final List<int> tempMin;
   final List<int> todayIcons;
   final List<int> tonightIcons;
   final List<int> precipChanceToday;
   final List<int> precipChanceTonight;
+  final List<String> dates;
 
   TenDayWeatherEntity({
     required this.dayOfWeek,
@@ -15,5 +16,6 @@ class TenDayWeatherEntity {
     required this.tonightIcons,
     required this.precipChanceToday,
     required this.precipChanceTonight,
+    required this.dates,
   });
 }

@@ -2,8 +2,8 @@ import 'package:geos/features/weather/domain/entities/current_weather_entity.dar
 
 class CurrentWeather {
   final int icon;
-  final double realFeel;
-  final double temperature;
+  final int realFeel;
+  final int temperature;
   final String weatherConditions;
 
   CurrentWeather({

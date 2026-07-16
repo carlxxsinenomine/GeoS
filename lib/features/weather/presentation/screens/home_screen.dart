@@ -4,6 +4,8 @@ import 'package:geos/features/weather/presentation/view_models/current_weather_n
 import 'package:geos/features/weather/presentation/view_models/hourly_weather_notifier.dart';
 import 'package:geos/features/weather/presentation/view_models/ten_day_weather_notifier.dart';
 import 'package:geos/features/weather/presentation/widgets/current_widget.dart';
+import 'package:geos/features/weather/presentation/widgets/home_screen/horizontal_container.dart';
+import 'package:geos/features/weather/presentation/widgets/home_screen/vertical_container.dart';
 import 'package:geos/features/weather/presentation/widgets/hourly_widget.dart';
 import 'package:geos/features/weather/presentation/widgets/ten_day_widget.dart';
 import 'package:geos/shared/widgets/bottom_nav.dart';
@@ -54,9 +56,65 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       },
                     ),
                     const SizedBox(height: 10),
-                    HourlyWidget(),
+                    hourlyProvider.when(
+                      data: (data) {
+                        final times = data.times;
+                        final icons = data.icons;
+                        final conditions = data.conditions;
+                        final temperatures = data.temperatures;
+                        final precipitations = data.precipitations;
+
+                        return HourlyWidget(
+                          hourlyWeather: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: times.length,
+                            itemBuilder: (context, index) {
+                              return VerticalContainer(
+                                time: times[index],
+                                cloud: icons[index],
+                                temp: temperatures[index],
+                                precipitation: precipitations[index],
+                              );
+                            },
+                          ),
+                        );
+                      },
+                      error: (err, stack) {
+                        return Center(child: Text('$err'));
+                      },
+                      loading: () {
+                        return const CircularProgressIndicator();
+                      },
+                    ),
                     const SizedBox(height: 10),
-                    TenDayWidget(),
+                    tenDayProvider.when(
+                      data: (data) {
+                        final dayOfWeek = data.dayOfWeek;
+                        final todayIcons = data.todayIcons;
+                        final dates = data.dates;
+                        final tempMax = data.tempMax;
+                        final precipChanceToday = data.precipChanceToday;
+                        final precipChanceTonight = data.precipChanceTonight;
+
+                        return TenDayWidget(
+                          weatherData: ListView.builder(
+                            itemCount: dayOfWeek.length,
+                            itemBuilder: (context, index) {
+                              return HorizontalContainer(
+                                day: dayOfWeek[index],
+                                date: dates[index],
+                                temp: tempMax[index],
+                                cloud: todayIcons[index],
+                                rainProb: precipChanceToday[index],
+                              );
+                            },
+                          ),
+                        );
+                      },
+                      error: (error, stack) => Center(child: Text("$error")),
+                      loading: () =>
+                          const Center(child: CircularProgressIndicator()),
+                    ),
                   ],
                 ),
               ),

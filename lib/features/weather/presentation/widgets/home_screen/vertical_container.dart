@@ -5,16 +5,16 @@ import 'package:google_fonts/google_fonts.dart';
 
 class VerticalContainer extends StatelessWidget {
   final String? time;
-  final IconData? cloud;
-  final String? temp;
-  final String? rainProb;
+  final int? cloud;
+  final int? temp;
+  final int? precipitation;
 
   const VerticalContainer({
     super.key,
     this.time,
     this.cloud,
     this.temp,
-    this.rainProb,
+    this.precipitation,
   });
 
   @override
@@ -33,15 +33,15 @@ class VerticalContainer extends StatelessWidget {
         MainAxisAlignment.spaceEvenly,
         children: [
           Text(
-            "6 AM",
+            time ?? '6AM',
             style: GoogleFonts.roboto(
               fontSize: 16,
               fontWeight: FontWeight(700),
             ),
           ),
-          SvgPicture.asset("${pathBase}7.svg"),
+          SvgPicture.asset("$pathBase$cloud.svg"),
           Text(
-            "26°",
+            "${temp ?? 26}°",
             style: GoogleFonts.roboto(
               fontSize: 32,
               fontWeight: FontWeight(700),
@@ -56,7 +56,7 @@ class VerticalContainer extends StatelessWidget {
               ),
               SizedBox(width: 4),
               Text(
-                "40%",
+                "$precipitation%",
                 style: GoogleFonts.roboto(
                   fontSize: 16,
                   fontWeight: FontWeight(500),

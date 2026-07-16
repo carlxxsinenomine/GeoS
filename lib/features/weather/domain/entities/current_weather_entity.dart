@@ -1,7 +1,7 @@
 class CurrentWeatherEntity {
   final int icon;
-  final double realFeel;
-  final double temperature;
+  final int realFeel;
+  final int temperature;
   final String weatherConditions;
 
   CurrentWeatherEntity({
