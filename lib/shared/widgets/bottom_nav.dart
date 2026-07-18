@@ -12,9 +12,9 @@ class BottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10),
+      padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 20),
       child: Container(
-        height: 90,
+        height: 80,
         decoration: BoxDecoration(
           color: Color(0xFFF5F5F5),
           boxShadow: [

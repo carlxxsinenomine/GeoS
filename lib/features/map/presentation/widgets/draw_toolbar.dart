@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:geos/features/map/presentation/widgets/toolbar_button.dart';
+import 'package:geos/features/map/presentation/widgets/toolbar_divider.dart';
 
 import '../../data/models/draw_mode.dart';
 
@@ -17,7 +19,10 @@ class DrawToolbar extends StatelessWidget {
   final DrawMode drawMode;
   final bool hasActivePoints;
   final bool hasSelection;
+
+  /// This calls [setMode] func from the [DrawNotifier] class
   final ValueChanged<DrawMode> onModeChanged;
+
   final VoidCallback onFinish;
   final VoidCallback onDeleteSelected;
   final VoidCallback onClearAll;
@@ -40,34 +45,34 @@ class DrawToolbar extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          _ToolbarButton(
+          ToolbarButton(
             icon: Icons.pan_tool_outlined,
             tooltip: 'Pan (no drawing)',
             isActive: drawMode == DrawMode.none,
             onTap: () => onModeChanged(DrawMode.none),
           ),
-          const _ToolbarDivider(),
-          _ToolbarButton(
+          const ToolbarDivider(),
+          ToolbarButton(
             icon: Icons.touch_app_outlined,
             tooltip: 'Select shape',
             isActive: drawMode == DrawMode.select,
             activeColor: Colors.blueGrey,
             onTap: () => onModeChanged(DrawMode.select),
           ),
-          const _ToolbarDivider(),
-          _ToolbarButton(
+          const ToolbarDivider(),
+          ToolbarButton(
             icon: Icons.place_outlined,
             tooltip: 'Place point',
             isActive: drawMode == DrawMode.point,
             onTap: () => onModeChanged(DrawMode.point),
           ),
-          _ToolbarButton(
+          ToolbarButton(
             icon: Icons.timeline,
             tooltip: 'Draw line',
             isActive: drawMode == DrawMode.line,
             onTap: () => onModeChanged(DrawMode.line),
           ),
-          _ToolbarButton(
+          ToolbarButton(
             icon: Icons.pentagon_outlined,
             tooltip: 'Draw polygon',
             isActive: drawMode == DrawMode.polygon,
@@ -75,8 +80,8 @@ class DrawToolbar extends StatelessWidget {
           ),
           if (hasActivePoints &&
               (drawMode == DrawMode.line || drawMode == DrawMode.polygon)) ...[
-            const _ToolbarDivider(),
-            _ToolbarButton(
+            const ToolbarDivider(),
+            ToolbarButton(
               icon: Icons.check_circle_outline,
               tooltip: 'Finish shape',
               isActive: false,
@@ -84,16 +89,16 @@ class DrawToolbar extends StatelessWidget {
               onTap: onFinish,
             ),
           ],
-          const _ToolbarDivider(),
+          const ToolbarDivider(),
           if (hasSelection)
-            _ToolbarButton(
+            ToolbarButton(
               icon: Icons.delete_rounded,
               tooltip: 'Delete selected shape',
               isActive: false,
               activeColor: Colors.redAccent,
               onTap: onDeleteSelected,
             ),
-          _ToolbarButton(
+          ToolbarButton(
             icon: Icons.delete_sweep_outlined,
             tooltip: 'Clear all shapes',
             isActive: false,
@@ -102,63 +107,6 @@ class DrawToolbar extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class _ToolbarButton extends StatelessWidget {
-  const _ToolbarButton({
-    required this.icon,
-    required this.tooltip,
-    required this.isActive,
-    required this.onTap,
-    this.activeColor,
-  });
-
-  final IconData icon;
-  final String tooltip;
-  final bool isActive;
-  final Color? activeColor;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final iconColor =
-        isActive ? activeColor : Colors.black54;
-
-    return Tooltip(
-      message: tooltip,
-      preferBelow: false,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(10),
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 150),
-          width: 44,
-          height: 44,
-          decoration: BoxDecoration(
-            color: isActive
-                ? (activeColor ?? const Color(0xFF3B82F6)).withValues(alpha: 0.18)
-                : Colors.transparent,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Icon(icon, color: iconColor, size: 22),
-        ),
-      ),
-    );
-  }
-}
-
-class _ToolbarDivider extends StatelessWidget {
-  const _ToolbarDivider();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 28,
-      height: 1,
-      margin: const EdgeInsets.symmetric(vertical: 4),
-      color: Colors.white12,
     );
   }
 }
