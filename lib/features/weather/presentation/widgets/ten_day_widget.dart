@@ -11,9 +11,8 @@ class TenDayWidget extends StatelessWidget {
     return Container(
       height: 400,
       width: double.infinity,
-      padding: const EdgeInsetsGeometry.symmetric(
-        horizontal: 25,
-        vertical: 20,
+      padding: const EdgeInsetsGeometry.only(
+        right: 25, left: 25, top: 20,
       ),
       decoration: BoxDecoration(
         // color: Colors.pink.shade300,
@@ -44,9 +43,7 @@ class TenDayWidget extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 15),
-          Expanded(
-            child: weatherData!,
-          ),
+          Flexible(child: weatherData!),
         ],
       ),
     );

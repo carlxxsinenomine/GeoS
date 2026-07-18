@@ -1,11 +1,24 @@
+import 'package:flutter/material.dart';
 import 'package:geos/features/map/presentation/screens/map_screen.dart';
 import 'package:geos/features/weather/presentation/screens/home_screen.dart';
+import 'package:geos/shared/widgets/bottom_nav.dart';
 import 'package:go_router/go_router.dart';
 
 final GoRouter router = GoRouter(
-  initialLocation: '/',
+  initialLocation: HomeScreen.path,
   routes: [
-    GoRoute(path: '/', builder: (context, state) => HomeScreen()),
-    GoRoute(path: '/map', builder: (context, state) => MapScreen()),
+    ShellRoute(routes: [
+      GoRoute(path: HomeScreen.path, builder: (context, state) => HomeScreen()),
+      GoRoute(path: MapScreen.path, builder: (context, state) => MapScreen()),
+    ],
+    builder: (context, state, child) {
+      return Scaffold(
+        extendBody: true,
+        body: child,
+        bottomNavigationBar: BottomNav(
+          currentPath: state.uri.toString(),
+        ),
+      );
+    })
   ],
 );

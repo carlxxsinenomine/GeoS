@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:geos/features/map/presentation/screens/map_screen.dart';
+import 'package:geos/features/weather/presentation/screens/home_screen.dart';
 import 'package:geos/shared/widgets/nav_button.dart';
+import 'package:go_router/go_router.dart';
 
 class BottomNav extends StatelessWidget {
-  const BottomNav({super.key});
+  final VoidCallback? onPress;
+  final String? currentPath;
+  const BottomNav({super.key, this.onPress, this.currentPath});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10),
       child: Container(
         height: 90,
         decoration: BoxDecoration(
@@ -25,9 +30,23 @@ class BottomNav extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            NavButton(isActive: true, text: 'Home', icon: Icons.home,),
-            NavButton(isActive: false, text: 'Map', icon: Icons.map_rounded,),
-            NavButton(isActive: false, text: 'Profile', icon: Icons.person,),
+            NavButton(
+              isActive: currentPath == HomeScreen.path,
+              text: 'Home',
+              icon: Icons.home,
+              onPress: () {
+                GoRouter.of(context).go(HomeScreen.path);
+              },
+            ),
+            NavButton(
+              isActive: currentPath == MapScreen.path,
+              text: 'Map',
+              icon: Icons.map_rounded,
+              onPress: () {
+                GoRouter.of(context).go(MapScreen.path);
+              },
+            ),
+            NavButton(isActive: false, text: 'Profile', icon: Icons.person),
           ],
         ),
       ),

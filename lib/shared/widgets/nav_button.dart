@@ -18,6 +18,7 @@ class NavButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: onPress,
       child: Container(
         width: 65,
         height: 65,

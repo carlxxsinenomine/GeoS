@@ -22,7 +22,6 @@ class HorizontalContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
         color: Colors.white54,
         borderRadius: BorderRadius.circular(25),

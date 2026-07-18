@@ -3,10 +3,12 @@ import 'package:geos/features/map/data/models/draw_mode.dart';
 import 'package:geos/features/map/presentation/view_models/draw_controller.dart';
 import 'package:geos/features/map/presentation/widgets/draw_toolbar.dart';
 import 'package:geos/shared/widgets/bottom_nav.dart';
+import 'package:go_router/go_router.dart';
 import 'package:maplibre/maplibre.dart';
 
 
 class MapScreen extends StatefulWidget {
+  static const String path = '/map';
   const MapScreen({super.key});
 
   @override
@@ -44,6 +46,8 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final String currentPath = GoRouterState.of(context).uri.toString();
+
     return Scaffold(
       body: Stack(
         children: [
@@ -87,12 +91,6 @@ class _MapScreenState extends State<MapScreen> {
                 ),
               ),
             ],
-          ),
-          Positioned(
-            bottom: 0,
-            right: 0,
-            left: 0,
-            child: BottomNav(),
           ),
         ],
       ),
