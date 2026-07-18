@@ -57,7 +57,12 @@ class HorizontalContainer extends StatelessWidget {
               ),
             ],
           ),
-          SvgPicture.asset("$pathBase${cloud ?? 7}.svg"),
+          SvgPicture.asset(
+            "$wunderPath${cloud ?? 7}.svg",
+            width: 50,
+            height: 50,
+            colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcATop),
+          ),
           Text(
             "${temp ?? 26}°",
             style: GoogleFonts.roboto(

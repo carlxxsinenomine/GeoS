@@ -65,11 +65,13 @@ class CurrentWidget extends StatelessWidget {
               ),
             ],
           ),
-          SvgPicture.asset(
-            "$wunderPath${iconCode ?? 11}.svg",
-            height: 110,
-            width: 110,
-            colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcATop),
+          Flexible(
+            child: SvgPicture.asset(
+              "$wunderPath${iconCode ?? 11}.svg",
+              height: 100,
+              width: 100,
+              colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcATop),
+            ),
           ),
         ],
       ),

@@ -34,10 +34,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               left: 10,
               right: 10,
               top: 0,
-              bottom: 90,
+              bottom: 0,
               child: SizedBox(
                 height: MediaQuery.sizeOf(context).height,
                 child: ListView(
+                  padding: EdgeInsets.only(bottom: 90),
                   children: [
                     currentProvider.when(
                       data: (data) {
@@ -165,7 +166,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
               ),
             ),
-            Positioned(bottom: 0, right: 0, left: 0, child: BottomNav()),
+            Positioned(bottom: 10, right: 0, left: 0, child: BottomNav()),
           ],
         ),
       ),

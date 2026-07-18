@@ -29,41 +29,50 @@ class VerticalContainer extends StatelessWidget {
       width: 100,
       margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
       child: Column(
-        mainAxisAlignment:
-        MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text(
-            time ?? '6AM',
-            style: GoogleFonts.roboto(
-              fontSize: 16,
-              fontWeight: FontWeight(700),
-            ),
-          ),
-          SvgPicture.asset("$pathBase$cloud.svg"),
-          Text(
-            "${temp ?? 26}°",
-            style: GoogleFonts.roboto(
-              fontSize: 32,
-              fontWeight: FontWeight(700),
-            ),
-          ),
-          Row(
-            mainAxisAlignment:
-            MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                "${pathBase}drop-icon.svg",
+          Flexible(
+            child: Text(
+              time ?? '6AM',
+              style: GoogleFonts.roboto(
+                fontSize: 16,
+                fontWeight: FontWeight(700),
               ),
-              SizedBox(width: 4),
-              Text(
-                "$precipitation%",
-                style: GoogleFonts.roboto(
-                  fontSize: 16,
-                  fontWeight: FontWeight(500),
-                  color: Colors.black54,
+            ),
+          ),
+          Flexible(
+            child: SvgPicture.asset(
+              "$wunderPath$cloud.svg",
+              width: 50,
+              height: 50,
+              colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcATop),
+            ),
+          ),
+          Flexible(
+            child: Text(
+              "${temp ?? 26}°",
+              style: GoogleFonts.roboto(
+                fontSize: 32,
+                fontWeight: FontWeight(700),
+              ),
+            ),
+          ),
+          Flexible(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset("${pathBase}drop-icon.svg"),
+                SizedBox(width: 4),
+                Text(
+                  "$precipitation%",
+                  style: GoogleFonts.roboto(
+                    fontSize: 16,
+                    fontWeight: FontWeight(500),
+                    color: Colors.black54,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
