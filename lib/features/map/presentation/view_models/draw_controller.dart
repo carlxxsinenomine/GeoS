@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geos/core/utils/geo_utils.dart';
 import 'package:geos/core/utils/geojson_builder.dart';
@@ -209,6 +210,9 @@ class DrawNotifier extends Notifier<DrawState> {
       features: newFeatures,
       currentPoints: [], // Clear points
     );
+    if (kDebugMode) {
+      print("Features ########################: ${state.features}");
+    }
     await _refreshSource();
   }
 

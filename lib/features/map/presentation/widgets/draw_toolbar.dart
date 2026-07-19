@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geos/features/map/presentation/widgets/geofence_save_modal.dart';
 import 'package:geos/features/map/presentation/widgets/toolbar_button.dart';
 import 'package:geos/features/map/presentation/widgets/toolbar_divider.dart';
 
@@ -86,7 +87,10 @@ class DrawToolbar extends StatelessWidget {
               tooltip: 'Finish shape',
               isActive: false,
               activeColor: Colors.green,
-              onTap: onFinish,
+              onTap: () async {
+                onFinish();
+                await GeofenceSaveModal.saveFenceInfo(context);
+              },
             ),
           ],
           const ToolbarDivider(),
