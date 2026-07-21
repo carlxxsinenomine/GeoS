@@ -6,6 +6,7 @@ import 'package:geos/core/utils/geo_utils.dart';
 import 'package:geos/core/utils/geojson_builder.dart';
 import 'package:geos/core/utils/map_layer_ids.dart';
 import 'package:geos/features/map/data/models/draw_mode.dart';
+import 'package:geos/features/map/domain/entities/geofence_info_entity.dart';
 import 'package:geos/features/map/presentation/widgets/draw_toolbar.dart';
 import 'package:maplibre/maplibre.dart';
 
@@ -195,15 +196,21 @@ class DrawNotifier extends Notifier<DrawState> {
     }
   }
 
-  /// Once the user is finished drawing shapes, click this to save
-  Future<void> finishShape() async {
+  /// Once the user is finished drawing shapes, click this to save.
+  /// [info] carries the geofence metadata entered by the user in the modal.
+  Future<void> finishShape(GeofenceInfoEntity info) async {
     final id = _nextId++;
     final newFeatures = List<Map<String, dynamic>>.of(state.features);
 
     if (state.drawMode == DrawMode.line && state.currentPoints.length >= 2) {
-      newFeatures.add(GeoJsonBuilder.lineFeature(state.currentPoints, id: id));
-    } else if (state.drawMode == DrawMode.polygon && state.currentPoints.length >= 3) {
-      newFeatures.add(GeoJsonBuilder.polygonFeature(state.currentPoints, id: id));
+      newFeatures.add(
+        GeoJsonBuilder.lineFeature(state.currentPoints, id: id, info: info),
+      );
+    } else if (state.drawMode == DrawMode.polygon &&
+        state.currentPoints.length >= 3) {
+      newFeatures.add(
+        GeoJsonBuilder.polygonFeature(state.currentPoints, id: id, info: info),
+      );
     }
 
     state = state.copyWith(
@@ -211,7 +218,7 @@ class DrawNotifier extends Notifier<DrawState> {
       currentPoints: [], // Clear points
     );
     if (kDebugMode) {
-      print("Features ########################: ${state.features}");
+      print('Features ########################: ${state.features}');
     }
     await _refreshSource();
   }
@@ -257,6 +264,22 @@ class DrawNotifier extends Notifier<DrawState> {
       features: newFeatures,
       selectedIndex: -1,
     );
+    await _refreshSource();
+  }
+
+  /// Updates the active status of the currently selected feature
+  Future<void> updateSelectedFeatureActiveStatus(bool isActive) async {
+    if (state.selectedIndex < 0 || state.selectedIndex >= state.features.length) return;
+
+    final newFeatures = List<Map<String, dynamic>>.of(state.features);
+    final feature = Map<String, dynamic>.from(newFeatures[state.selectedIndex]);
+    final properties = Map<String, dynamic>.from(feature['properties'] as Map);
+    
+    properties['isActive'] = isActive;
+    feature['properties'] = properties;
+    newFeatures[state.selectedIndex] = feature;
+
+    state = state.copyWith(features: newFeatures);
     await _refreshSource();
   }
 

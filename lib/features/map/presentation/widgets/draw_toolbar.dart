@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geos/features/map/domain/entities/geofence_info_entity.dart';
 import 'package:geos/features/map/presentation/widgets/geofence_save_modal.dart';
 import 'package:geos/features/map/presentation/widgets/toolbar_button.dart';
 import 'package:geos/features/map/presentation/widgets/toolbar_divider.dart';
@@ -24,7 +25,7 @@ class DrawToolbar extends StatelessWidget {
   /// This calls [setMode] func from the [DrawNotifier] class
   final ValueChanged<DrawMode> onModeChanged;
 
-  final VoidCallback onFinish;
+  final ValueChanged<GeofenceInfoEntity> onFinish;
   final VoidCallback onDeleteSelected;
   final VoidCallback onClearAll;
 
@@ -88,8 +89,9 @@ class DrawToolbar extends StatelessWidget {
               isActive: false,
               activeColor: Colors.green,
               onTap: () async {
-                onFinish();
-                await GeofenceSaveModal.saveFenceInfo(context);
+                final result = await GeofenceSaveModal.saveFenceInfo(context);
+                // Only proceed if the user confirmed (didn't cancel)
+                if (result != null) onFinish(result);
               },
             ),
           ],

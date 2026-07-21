@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geos/features/map/data/models/draw_mode.dart';
 import 'package:geos/features/map/presentation/view_models/draw_controller.dart';
+import 'package:geos/features/map/presentation/view_models/offset_provider.dart';
 import 'package:geos/features/map/presentation/widgets/draw_toolbar.dart';
+import 'package:geos/features/map/presentation/widgets/information_bubble.dart';
 import 'package:maplibre/maplibre.dart';
 
 class MapScreen extends ConsumerStatefulWidget {
@@ -14,6 +16,7 @@ class MapScreen extends ConsumerStatefulWidget {
 }
 
 class _MapScreenState extends ConsumerState<MapScreen> {
+  Map<String, dynamic>? selectedGeofenceProps;
 
   void _onMapCreated(MapController controller) {
     ref.read(drawProvider.notifier).mapController = controller;
@@ -27,7 +30,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
     await drawNotifier.initLayers();
   }
 
-  void _onMapEvent(MapEvent event) {
+  void _onMapEvent(MapEvent event) async {
     if (event is! MapEventClick) return;
 
     // ref.read for callbacks
@@ -35,9 +38,30 @@ class _MapScreenState extends ConsumerState<MapScreen> {
     final drawNotifier = ref.read(drawProvider.notifier);
 
     if (drawState.drawMode == DrawMode.select) {
-      drawNotifier.handleSelectTap(event.point, event.screenPoint);
+      await drawNotifier.handleSelectTap(event.point, event.screenPoint);
+      if (!mounted) return;
+      
+      final newState = ref.read(drawProvider);
+      if (newState.selectedIndex != -1) {
+        final feature = newState.features[newState.selectedIndex];
+        final properties = Map<String, dynamic>.from(feature['properties'] as Map);
+        setState(() {
+          selectedGeofenceProps = properties;
+
+          ref.read(offsetProvider.notifier).updateOffset(event.screenPoint);
+        });
+      } else {
+        setState(() {
+          selectedGeofenceProps = null;
+          ref.read(offsetProvider.notifier).updateOffset(null);
+        });
+      }
     } else if (drawState.drawMode != DrawMode.none) {
       drawNotifier.handleDrawTap(event.point);
+      setState(() {
+        selectedGeofenceProps = null;
+        ref.read(offsetProvider.notifier).updateOffset(null);
+      });
     }
   }
 
@@ -53,6 +77,8 @@ class _MapScreenState extends ConsumerState<MapScreen> {
 
     // Read the notifier to pass its functions as callbacks
     final drawNotifier = ref.read(drawProvider.notifier);
+
+    Offset? popupPosition = ref.watch(offsetProvider);
 
     return Scaffold(
       body: Stack(
@@ -94,9 +120,15 @@ class _MapScreenState extends ConsumerState<MapScreen> {
               ),
             ],
           ),
-
+          if (selectedGeofenceProps != null && popupPosition!= null)
+            Positioned(
+              left: popupPosition!.dx - 140,
+              bottom: MediaQuery.of(context).size.height - popupPosition!.dy,
+              child: InformationBubble(selectedGeofenceProps: selectedGeofenceProps),
+            ),
         ],
       ),
     );
   }
 }
+
