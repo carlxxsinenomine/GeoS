@@ -1,8 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:geos/core/theme/theme.dart';
+import 'package:geos/features/auth/presentation/screens/register_screen.dart';
 import 'package:geos/features/auth/presentation/widgets/custom_outlined_button.dart';
 import 'package:geos/features/auth/presentation/widgets/input_field.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -62,37 +64,34 @@ class _LoginScreen extends State<LoginScreen> {
             const SizedBox(height: 24),
             InputField(
               label: "Email or Phone Number",
-              textField: TextField(
-                controller: _emailOrNumberController,
-                decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.person),
-                  hintText: "Enter your details",
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                  ),
+              controller: _emailOrNumberController,
+              inputDecoration: InputDecoration(
+                prefixIcon: Icon(Icons.person),
+                hintText: "Enter your details",
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey, width: 1.0),
                 ),
               ),
             ),
             const SizedBox(height: 24),
             InputField(
               label: "Password",
-              textField: TextField(
-                controller: _passwordController,
-                decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.lock),
-                  hintText: "Enter your password",
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                  ),
+              controller: _passwordController,
+              inputDecoration: const InputDecoration(
+                prefixIcon: Icon(Icons.lock),
+                hintText: "Enter your password",
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey, width: 1.0),
                 ),
               ),
             ),
+            const SizedBox(height: 4),
             GestureDetector(
               child: Text(
                 "Forgot password?",
@@ -140,10 +139,7 @@ class _LoginScreen extends State<LoginScreen> {
               icon: Icons.message,
             ),
             const SizedBox(height: 10),
-            CustomOutlinedButton(
-              label: "Login with Email code",
-              icon: Icons.email,
-            ),
+            CustomOutlinedButton(label: "Login with Google", icon: Icons.email),
             const Expanded(child: SizedBox()),
             SafeArea(
               child: Center(
@@ -157,7 +153,10 @@ class _LoginScreen extends State<LoginScreen> {
                     children: [
                       TextSpan(
                         text: "Sign up",
-                        recognizer: TapGestureRecognizer()..onTap = () {},
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            GoRouter.of(context).push(RegisterScreen.path);
+                          },
                         style: GoogleFonts.manrope(
                           color: Themes.primary,
                           fontSize: 16,

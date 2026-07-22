@@ -3,18 +3,47 @@ import 'package:google_fonts/google_fonts.dart';
 
 class InputField extends StatelessWidget {
   final String label;
-  final Widget textField;
+  final String? hintText;
+  final TextField? textField;
+  final TextEditingController? controller;
+  final InputDecoration? inputDecoration;
+  final bool shouldObscure;
 
-  const InputField({super.key, required this.label, required this.textField});
+  const InputField({
+    super.key,
+    required this.label,
+     this.textField,
+    this.hintText,
+    this.inputDecoration,
+    this.controller,
+    this.shouldObscure = false
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: GoogleFonts.manrope(fontWeight: FontWeight(800), fontSize: 14),),
-        const SizedBox(height: 4,),
-        textField
+        Text(
+          label,
+          style: GoogleFonts.manrope(fontWeight: FontWeight(800), fontSize: 14),
+        ),
+        const SizedBox(height: 4),
+        TextField(
+          controller: controller,
+          obscureText: shouldObscure,
+          decoration:
+              inputDecoration ??
+              InputDecoration(
+                hintText: hintText,
+                enabledBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                ),
+                focusedBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                ),
+              ),
+        ),
       ],
     );
   }
