@@ -8,15 +8,17 @@ class InputField extends StatelessWidget {
   final TextEditingController? controller;
   final InputDecoration? inputDecoration;
   final bool shouldObscure;
+  final String? passwordBelowText;
 
   const InputField({
     super.key,
     required this.label,
-     this.textField,
+    this.textField,
     this.hintText,
     this.inputDecoration,
     this.controller,
-    this.shouldObscure = false
+    this.shouldObscure = false,
+    this.passwordBelowText
   });
 
   @override
@@ -44,6 +46,8 @@ class InputField extends StatelessWidget {
                 ),
               ),
         ),
+        if(passwordBelowText != null) Text(passwordBelowText!),
+
       ],
     );
   }

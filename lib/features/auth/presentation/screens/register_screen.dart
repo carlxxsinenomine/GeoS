@@ -188,6 +188,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     label: "Password",
                     controller: passwordController,
                     shouldObscure: _obscurePass,
+                    passwordBelowText: "Must be at least 8 characters long.",
                     inputDecoration: InputDecoration(
                       suffixIcon: IconButton(
                         onPressed: () {
@@ -308,11 +309,85 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Addre",
-                    style: GoogleFonts.manrope(
-                      fontWeight: const FontWeight(800),
-                      fontSize: 14,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          "Address",
+                          style: GoogleFonts.manrope(
+                            fontWeight: const FontWeight(800),
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        child: Row(
+                          children: [
+                            const Icon(Icons.my_location),
+                            const SizedBox(width: 5),
+                            Text(
+                              "Use Current Location",
+                              style: GoogleFonts.manrope(),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8,),
+                  TextField(
+                    controller: provinceController,
+                    decoration: const InputDecoration(
+                      hintText: "Province",
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8,),
+                  TextField(
+                    controller: cityController,
+                    decoration: const InputDecoration(
+                      hintText: "Municipality / City",
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8,),
+                  TextField(
+                    controller: barangayController,
+                    decoration: const InputDecoration(
+                      hintText: "Barangay",
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16,),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 60,
+                    child: TextButton(
+                      onPressed: () {},
+                      style: TextButton.styleFrom(backgroundColor: Themes.primary),
+                      child: const Text(
+                        "Register",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
                     ),
                   ),
                 ],
