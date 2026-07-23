@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geos/features/map/presentation/screens/map_screen.dart';
+import 'package:geos/features/profile/presentation/screens/profile_screen.dart';
 import 'package:geos/features/weather/presentation/screens/home_screen.dart';
 import 'package:geos/shared/widgets/nav_button.dart';
 import 'package:go_router/go_router.dart';
@@ -7,6 +8,7 @@ import 'package:go_router/go_router.dart';
 class BottomNav extends StatelessWidget {
   final VoidCallback? onPress;
   final String? currentPath;
+
   const BottomNav({super.key, this.onPress, this.currentPath});
 
   @override
@@ -46,7 +48,14 @@ class BottomNav extends StatelessWidget {
                 GoRouter.of(context).go(MapScreen.path);
               },
             ),
-            NavButton(isActive: false, text: 'Profile', icon: Icons.person),
+            NavButton(
+              isActive: currentPath == ProfileScreen.path,
+              text: 'Profile',
+              icon: Icons.person,
+              onPress: () {
+                GoRouter.of(context).go(ProfileScreen.path);
+              },
+            ),
           ],
         ),
       ),

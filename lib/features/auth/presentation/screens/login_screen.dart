@@ -4,6 +4,7 @@ import 'package:geos/core/theme/theme.dart';
 import 'package:geos/features/auth/presentation/screens/register_screen.dart';
 import 'package:geos/features/auth/presentation/widgets/custom_outlined_button.dart';
 import 'package:geos/features/auth/presentation/widgets/input_field.dart';
+import 'package:geos/features/weather/presentation/screens/home_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -103,7 +104,9 @@ class _LoginScreen extends State<LoginScreen> {
               width: double.infinity,
               height: 60,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  GoRouter.of(context).go(HomeScreen.path);
+                },
                 style: TextButton.styleFrom(backgroundColor: Themes.primary),
                 child: Text(
                   "Login",
