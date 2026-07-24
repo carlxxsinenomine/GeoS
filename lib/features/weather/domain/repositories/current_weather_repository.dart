@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'package:geos/features/weather/domain/entities/current_weather_entity.dart';
 
 abstract class CurrentWeatherRepository {
